@@ -2,6 +2,7 @@ certifi==2019.6.16
 chardet==3.0.4
 Click==7.0
 dash==1.1.1
+dash-player==0.0.1
 dash-core-components==1.1.1
 dash-html-components==1.0.0
 dash-renderer==1.0.0
@@ -22,6 +23,7 @@ nbformat==4.4.0
 numpy==1.16.4
 pandas==0.24.2
 plotly==4.1.0
+requests==2.23.0
 pytz==2019.1
 six==1.12.0
 traitlets==4.3.2
