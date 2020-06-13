@@ -12,9 +12,14 @@ import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 
-app = dash.Dash(__name__)
+tabtitle='beer!'
 
-app.scripts.config.serve_locally = True
+########### Initiate the app
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
+app.title=tabtitle
+
 
 def stylemarg (a):
 	return {'margin-bottom': '20px','backgroundColor': a}
@@ -81,4 +86,4 @@ def set_seekTo(red,blue,green,style):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server()
