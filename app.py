@@ -12,7 +12,7 @@ import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 
-tabtitle='beer!'
+tabtitle='Tantrum Time!'
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -20,17 +20,29 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 app.title=tabtitle
 
-
 def stylemarg (a):
 	return {'margin-bottom': '20px','backgroundColor': a}
 	
 app.layout = html.Div([
-    dash_player.DashPlayer(
+    html.Div([dash_player.DashPlayer(
         id='video-player',
 		playing=True,
         url='/static/ezgifcom-gif-maker_2bmSsLcp_dxTU.mp4',
         controls=False
     ),
+	dcc.Dropdown(
+		id='drop',
+		style={
+						  'border-radius': '10px',
+						  'width': '200px',
+						  'margin-bottom': '20px',
+						  'position': 'relative', 
+						  
+						  },
+		options=[{'label':'COOKIE','value':'/static/ezgifcom-gif-maker_2bmSsLcp_dxTU.mp4'},{'label':'KERMIT','value':'/static/ezgifcom-gif-maker_ep8pKEXk_tc2a.mp4'}],
+		value='/static/ezgifcom-gif-maker_2bmSsLcp_dxTU.mp4'
+		)
+	]),
 	html.Button(id='color',style={'margin-bottom': '20px','backgroundColor': 'green'} ),
 	html.Div('What is the color?',id='question', style={'margin-bottom': '20px'}),
     html.Button('green', id='green',n_clicks_timestamp=0),
@@ -63,7 +75,10 @@ def update_time(currentTime):
 def update_methods(secondsLoaded, duration):
     return 'Second Loaded: {}, Duration: {}'.format(secondsLoaded, duration)
 
-
+@app.callback(Output('video-player', 'url'),
+              [Input('drop', 'value')])
+def update_video(currentTime):
+    return currentTime
 
 		
 @app.callback([Output('video-player', 'seekTo'),Output('color', 'style'),Output('timestamp', 'children')],
